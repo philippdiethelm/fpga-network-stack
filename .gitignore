@@ -10,9 +10,12 @@ doc/
 
 #build folders
 build*/
+ip/vu9p/*
+ip/zu4/*
 
 #project folders
 *_prj/
+scripts/tcp_ip_*
 
 #logs files
 *.log
