@@ -17,6 +17,11 @@ add_vitis_ip(${PROJECT_NAME}
                     "echo_server_application.hpp"
                  TB_FILES
                     "test_echo_server_application.cpp"
+                 HLS_FLAGS
+                    "-DFNS_DATA_WIDTH=${FNS_DATA_WIDTH}"
+                    "-DFNS_ROCE_STACK_MAX_QPS=${FNS_ROCE_STACK_MAX_QPS}"
+                    "-DTCP_MSS=${FNS_TCP_STACK_MSS}"
+                    "-DTCP_STACK_MAX_SESSIONS=${FNS_TCP_STACK_MAX_SESSIONS}"
                  PLATFORM_PART ${FNS_PLATFORM_PART}
                  VENDOR "ethz.systems.fpga"
                  DISPLAY_NAME "Echo Server Application for 10G TOE"
