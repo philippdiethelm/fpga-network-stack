@@ -77,6 +77,17 @@ set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.HAS_TKEEP {1} CONFIG.
 generate_target {instantiation_template} [get_files $ip_dir/vu9p/axis_register_slice_64/axis_register_slice_64.xci]
 update_compile_order -fileset sources_1
 
+create_ip -name axis_register_slice -vendor xilinx.com -library ip -version 1.1 -module_name axis_register_slice_48 -dir $ip_dir/vu9p
+set_property -dict [list CONFIG.TDATA_NUM_BYTES {6}] [get_ips axis_register_slice_48]
+generate_target {instantiation_template} [get_files $ip_dir/vu9p/axis_register_slice_48/axis_register_slice_48.xci]
+update_compile_order -fileset sources_1
+
+create_ip -name axis_register_slice -vendor xilinx.com -library ip -version 1.1 -module_name axis_register_slice_176 -dir $ip_dir/vu9p
+set_property -dict [list CONFIG.TDATA_NUM_BYTES {22}] [get_ips axis_register_slice_176]
+generate_target {instantiation_template} [get_files $ip_dir/vu9p/axis_register_slice_176/axis_register_slice_176.xci]
+update_compile_order -fileset sources_1
+
+
 #Interconnects
 
 create_ip -name axis_interconnect -vendor xilinx.com -library ip -version 1.1 -module_name axis_interconnect_3to1 -dir $ip_dir/vu9p

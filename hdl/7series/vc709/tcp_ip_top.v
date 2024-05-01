@@ -451,8 +451,8 @@ network_stack #(
  `endif
  .ip_address_in(local_ip_address),
  .ip_address_out(ip_address_out),
- .regSessionCount_V(regSessionCount),
- .regSessionCount_V_ap_vld(regSessionCount_valid),
+ .regSessionCount(regSessionCount),
+ .regSessionCount_ap_vld(regSessionCount_valid),
 
  .board_number(gpio_switch[3:0]),
  .subnet_number(gpio_switch[5:4])
@@ -462,51 +462,6 @@ network_stack #(
 /*
   * Application Module
   */
- /*echo_server_application_ip echo_server (
-   .m_axis_close_connection_V_V_TVALID(axis_close_connection_tvalid),      // output wire m_axis_close_connection_TVALID
-   .m_axis_close_connection_V_V_TREADY(axis_close_connection_tready),      // input wire m_axis_close_connection_TREADY
-   .m_axis_close_connection_V_V_TDATA(axis_close_connection_tdata),        // output wire [15 : 0] m_axis_close_connection_TDATA
-   .m_axis_listen_port_V_V_TVALID(axis_listen_port_tvalid),                // output wire m_axis_listen_port_TVALID
-   .m_axis_listen_port_V_V_TREADY(axis_listen_port_tready),                // input wire m_axis_listen_port_TREADY
-   .m_axis_listen_port_V_V_TDATA(axis_listen_port_tdata),                  // output wire [15 : 0] m_axis_listen_port_TDATA
-   .m_axis_open_connection_V_TVALID(axis_open_connection_tvalid),        // output wire m_axis_open_connection_TVALID
-   .m_axis_open_connection_V_TREADY(axis_open_connection_tready),        // input wire m_axis_open_connection_TREADY
-   .m_axis_open_connection_V_TDATA(axis_open_connection_tdata),          // output wire [47 : 0] m_axis_open_connection_TDATA
-   .m_axis_read_package_V_TVALID(axis_read_package_tvalid),              // output wire m_axis_read_package_TVALID
-   .m_axis_read_package_V_TREADY(axis_read_package_tready),              // input wire m_axis_read_package_TREADY
-   .m_axis_read_package_V_TDATA(axis_read_package_tdata),                // output wire [31 : 0] m_axis_read_package_TDATA
-   .m_axis_tx_data_TVALID(axis_tx_data_tvalid),                        // output wire m_axis_tx_data_TVALID
-   .m_axis_tx_data_TREADY(axis_tx_data_tready),                        // input wire m_axis_tx_data_TREADY
-   .m_axis_tx_data_TDATA(axis_tx_data_tdata),                          // output wire [63 : 0] m_axis_tx_data_TDATA
-   .m_axis_tx_data_TKEEP(axis_tx_data_tkeep),                          // output wire [7 : 0] m_axis_tx_data_TKEEP
-   .m_axis_tx_data_TLAST(axis_tx_data_tlast),                          // output wire [0 : 0] m_axis_tx_data_TLAST
-   .m_axis_tx_metadata_V_TVALID(axis_tx_metadata_tvalid),                // output wire m_axis_tx_metadata_TVALID
-   .m_axis_tx_metadata_V_TREADY(axis_tx_metadata_tready),                // input wire m_axis_tx_metadata_TREADY
-   .m_axis_tx_metadata_V_TDATA(axis_tx_metadata_tdata),                  // output wire [15 : 0] m_axis_tx_metadata_TDATA
-   .s_axis_listen_port_status_V_TVALID(axis_listen_port_status_tvalid),//axis_listen_port_status_tvalid),  // input wire s_axis_listen_port_status_TVALID
-   .s_axis_listen_port_status_V_TREADY(axis_listen_port_status_tready),//axis_listen_port_status_tready),  // output wire s_axis_listen_port_status_TREADY
-   .s_axis_listen_port_status_V_TDATA(axis_listen_port_status_tdata),//axis_listen_port_status_tdata),    // input wire [7 : 0] s_axis_listen_port_status_TDATA
-   .s_axis_notifications_V_TVALID(axis_notifications_tvalid),            // input wire s_axis_notifications_TVALID
-   .s_axis_notifications_V_TREADY(axis_notifications_tready),            // output wire s_axis_notifications_TREADY
-   .s_axis_notifications_V_TDATA(axis_notifications_tdata),              // input wire [87 : 0] s_axis_notifications_TDATA
-   .s_axis_open_status_V_TVALID(axis_open_status_tvalid),                // input wire s_axis_open_status_TVALID
-   .s_axis_open_status_V_TREADY(axis_open_status_tready),                // output wire s_axis_open_status_TREADY
-   .s_axis_open_status_V_TDATA(axis_open_status_tdata),                  // input wire [23 : 0] s_axis_open_status_TDATA
-   .s_axis_rx_data_TVALID(axis_rx_data_tvalid),                        // input wire s_axis_rx_data_TVALID
-   .s_axis_rx_data_TREADY(axis_rx_data_tready),                        // output wire s_axis_rx_data_TREADY
-   .s_axis_rx_data_TDATA(axis_rx_data_tdata),                          // input wire [63 : 0] s_axis_rx_data_TDATA
-   .s_axis_rx_data_TKEEP(axis_rx_data_tkeep),                          // input wire [7 : 0] s_axis_rx_data_TKEEP
-   .s_axis_rx_data_TLAST(axis_rx_data_tlast),                          // input wire [0 : 0] s_axis_rx_data_TLAST
-   .s_axis_rx_metadata_V_V_TVALID(axis_rx_metadata_tvalid),                // input wire s_axis_rx_metadata_TVALID
-   .s_axis_rx_metadata_V_V_TREADY(axis_rx_metadata_tready),                // output wire s_axis_rx_metadata_TREADY
-   .s_axis_rx_metadata_V_V_TDATA(axis_rx_metadata_tdata),                  // input wire [15 : 0] s_axis_rx_metadata_TDATA
-   .s_axis_tx_status_V_TVALID(axis_tx_status_tvalid),                    // input wire s_axis_tx_status_TVALID
-   .s_axis_tx_status_V_TREADY(axis_tx_status_tready),                    // output wire s_axis_tx_status_TREADY
-   .s_axis_tx_status_V_TDATA(axis_tx_status_tdata),                      // input wire [23 : 0] s_axis_tx_status_TDATA
-   .ap_clk(aclk),                                                          // input wire aclk
-   .ap_rst_n(aresetn)                                                    // input wire aresetn
- );*/
- 
  
  `ifdef ECHO_SERVER
  echo_server_application_ip echo_server (
@@ -612,14 +567,14 @@ network_stack #(
    .s_axis_tx_status_TDATA(axis_tx_status_tdata),                      // input wire [23 : 0] s_axis_tx_status_TDATA
    
    //Client only
-   .runExperiment_V(runExperiment | button_west),
-   .dualModeEn_V(dualMode),                                          // input wire [0 : 0] dualModeEn_V
-   .useConn_V(noOfConnections),                                                // input wire [7 : 0] useConn_V
-   .pkgWordCount_V(pkgWordCount),                                      // input wire [7 : 0] pkgWordCount_V
-   .regIpAddress0_V(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
-   .regIpAddress1_V(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
-   .regIpAddress2_V(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
-   .regIpAddress3_V(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
+   .runExperiment(runExperiment | button_west),
+   .dualModeEn(dualMode),                                          // input wire [0 : 0] dualModeEn_V
+   .useConn(noOfConnections),                                                // input wire [7 : 0] useConn_V
+   .pkgWordCount(pkgWordCount),                                      // input wire [7 : 0] pkgWordCount_V
+   .regIpAddress0(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
+   .regIpAddress1(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
+   .regIpAddress2(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
+   .regIpAddress3(32'h0B01D40A),                                    // input wire [31 : 0] regIpAddress1_V
    .aclk(aclk),                                                          // input wire aclk
    .aresetn(aresetn)                                                    // input wire aresetn
  );
@@ -663,10 +618,10 @@ network_stack #(
   iperf_udp_client_ip iperf_udp_client_inst (
     .aclk(aclk),                                            // input wire aclk
     .aresetn(aresetn),                                      // input wire aresetn
-    .runExperiment_V(runUdpExperiment | runIperfUdp),                      // input wire [0 : 0] runExperiment_V
-    .regPacketGap_V(packetGap),
-    //.regMyIpAddress_V(32'h02D4010B),                    // input wire [31 : 0] regMyIpAddress_V
-    .regTargetIpAddress_V({target_ip_address, target_ip_address, target_ip_address, target_ip_address}),            // input wire [31 : 0] regTargetIpAddress_V
+    .runExperiment(runUdpExperiment | runIperfUdp),                      // input wire [0 : 0] runExperiment_V
+    .regPacketGap(packetGap),
+    //.regMyIpAddress(32'h02D4010B),                    // input wire [31 : 0] regMyIpAddress_V
+    .regTargetIpAddress({target_ip_address, target_ip_address, target_ip_address, target_ip_address}),            // input wire [31 : 0] regTargetIpAddress_V
     
     .s_axis_rx_metadata_TVALID(axis_rx_udp_metadata_tvalid),
     .s_axis_rx_metadata_TREADY(axis_rx_udp_metadata_tready),

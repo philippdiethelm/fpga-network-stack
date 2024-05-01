@@ -271,8 +271,8 @@ adm7v3_10g_interface n10g_interface_inst (
 /*
  * TCP/IP Wrapper Module
  */
-wire [15:0] regSessionCount_V;
-wire regSessionCount_V_ap_vld;
+wire [15:0] regSessionCount;
+wire regSessionCount_ap_vld;
 
 wire[7:0]   axi_debug1_tkeep;
 wire[63:0]  axi_debug1_tdata;
@@ -323,15 +323,15 @@ ila_0 ila2 (
   .probe4(AXI_M_Stream_TLAST)  // input wire [0 : 0] probe4
 );*/
 // UDP Loopback App to UDP App Mux wires
-wire        shim2mux_requestPortOpenOut_V_TVALID;
-wire        shim2mux_requestPortOpenOut_V_TREADY;
-wire[15:0]  shim2mux_requestPortOpenOut_V_TDATA;    // Used to request the opening of a port by the App
-wire        mux2shim_portOpenReplyIn_V_V_TVALID;
-wire        mux2shim_portOpenReplyIn_V_V_TREADY;
-wire[7:0]   mux2shim_portOpenReplyIn_V_V_TDATA;     // Reply to the open port request from the UDD Offload Engine
-wire        mux2shimRxMetadataIn_V_TVALID;
-wire        mux2shimRxMetadataIn_V_TREADY;
-wire[95:0]  mux2shimRxMetadataIn_V_TDATA;           // Metadata output from the UDP App Mux
+wire        shim2mux_requestPortOpenOut_TVALID;
+wire        shim2mux_requestPortOpenOut_TREADY;
+wire[15:0]  shim2mux_requestPortOpenOut_TDATA;    // Used to request the opening of a port by the App
+wire        mux2shim_portOpenReplyIn_TVALID;
+wire        mux2shim_portOpenReplyIn_TREADY;
+wire[7:0]   mux2shim_portOpenReplyIn_TDATA;     // Reply to the open port request from the UDD Offload Engine
+wire        mux2shimRxMetadataIn_TVALID;
+wire        mux2shimRxMetadataIn_TREADY;
+wire[95:0]  mux2shimRxMetadataIn_TDATA;           // Metadata output from the UDP App Mux
 wire        mux2shimRxDataIn_TVALID;
 wire        mux2shimRxDataIn_TREADY;
 wire[63:0]  mux2shimRxDataIn_TDATA;                 // Packet data output from the UDP App Mux
@@ -342,12 +342,12 @@ wire        shim2mux_TREADY;
 wire[63:0]  shim2mux_TDATA;
 wire[7:0]   shim2mux_TKEEP;
 wire        shim2mux_TLAST;
-wire        shim2muxTxMetadataOut_V_TVALID;
-wire        shim2muxTxMetadataOut_V_TREADY;
-wire[95:0]  shim2muxTxMetadataOut_V_TDATA;
-wire        shim2muxTxLengthOut_V_V_TVALID;
-wire        shim2muxTxLengthOut_V_V_TREADY;
-wire[15:0]  shim2muxTxLengthOut_V_V_TDATA;
+wire        shim2muxTxMetadataOut_TVALID;
+wire        shim2muxTxMetadataOut_TREADY;
+wire[95:0]  shim2muxTxMetadataOut_TDATA;
+wire        shim2muxTxLengthOut_TVALID;
+wire        shim2muxTxLengthOut_TREADY;
+wire[15:0]  shim2muxTxLengthOut_TDATA;
 
 wire[31:0]  ipAddressOut;
 
@@ -522,34 +522,34 @@ network_stack network_stack_inst(
 .s_axis_tx_metadata_TVALID              (axis_tx_metadata_TVALID),
 .s_axis_tx_metadata_TREADY              (axis_tx_metadata_TREADY),
 .s_axis_tx_metadata_TDATA               (axis_tx_metadata_TDATA),
-.regSessionCount_V                      (regSessionCount_V),
-.regSessionCount_V_ap_vld               (regSessionCount_V_ap_vld),
+.regSessionCount                        (regSessionCount),
+.regSessionCount_ap_vld                 (regSessionCount_ap_vld),
 // UDP User I/F to Loopback module //
-.lbPortOpenReplyIn_TVALID               (mux2shim_portOpenReplyIn_V_V_TVALID),         // output wire portOpenReplyIn_TVALID
-.lbPortOpenReplyIn_TREADY               (mux2shim_portOpenReplyIn_V_V_TREADY),         // input wire portOpenReplyIn_TREADY
-.lbPortOpenReplyIn_TDATA                (mux2shim_portOpenReplyIn_V_V_TDATA),          // output wire [7 : 0] portOpenReplyIn_TDATA
-.lbRequestPortOpenOut_TVALID            (shim2mux_requestPortOpenOut_V_TVALID),        // input wire requestPortOpenOut_TVALID
-.lbRequestPortOpenOut_TREADY            (shim2mux_requestPortOpenOut_V_TREADY),        // output wire requestPortOpenOut_TREADY
-.lbRequestPortOpenOut_TDATA             (shim2mux_requestPortOpenOut_V_TDATA),         // input wire [15 : 0] requestPortOpenOut_TDATA
+.lbPortOpenReplyIn_TVALID               (mux2shim_portOpenReplyIn_TVALID),         // output wire portOpenReplyIn_TVALID
+.lbPortOpenReplyIn_TREADY               (mux2shim_portOpenReplyIn_TREADY),         // input wire portOpenReplyIn_TREADY
+.lbPortOpenReplyIn_TDATA                (mux2shim_portOpenReplyIn_TDATA),          // output wire [7 : 0] portOpenReplyIn_TDATA
+.lbRequestPortOpenOut_TVALID            (shim2mux_requestPortOpenOut_TVALID),        // input wire requestPortOpenOut_TVALID
+.lbRequestPortOpenOut_TREADY            (shim2mux_requestPortOpenOut_TREADY),        // output wire requestPortOpenOut_TREADY
+.lbRequestPortOpenOut_TDATA             (shim2mux_requestPortOpenOut_TDATA),         // input wire [15 : 0] requestPortOpenOut_TDATA
 .lbRxDataIn_TVALID                      (mux2shimRxDataIn_TVALID),                     // output wire rxDataIn_TVALID
 .lbRxDataIn_TREADY                      (mux2shimRxDataIn_TREADY),                     // input wire rxDataIn_TREADY
 .lbRxDataIn_TDATA                       (mux2shimRxDataIn_TDATA),                      // output wire [63 : 0] rxDataIn_TDATA
 .lbRxDataIn_TKEEP                       (mux2shimRxDataIn_TKEEP),                      // output wire [7 : 0] rxDataIn_TKEEP
 .lbRxDataIn_TLAST                       (mux2shimRxDataIn_TLAST),                      // output wire [0 : 0] rxDataIn_TLAST
-.lbRxMetadataIn_TVALID                  (mux2shimRxMetadataIn_V_TVALID),               // output wire rxMetadataIn_TVALID
-.lbRxMetadataIn_TREADY                  (mux2shimRxMetadataIn_V_TREADY),               // input wire rxMetadataIn_TREADY
-.lbRxMetadataIn_TDATA                   (mux2shimRxMetadataIn_V_TDATA),                // output wire [95 : 0] rxMetadataIn_TDATA
+.lbRxMetadataIn_TVALID                  (mux2shimRxMetadataIn_TVALID),               // output wire rxMetadataIn_TVALID
+.lbRxMetadataIn_TREADY                  (mux2shimRxMetadataIn_TREADY),               // input wire rxMetadataIn_TREADY
+.lbRxMetadataIn_TDATA                   (mux2shimRxMetadataIn_TDATA),                // output wire [95 : 0] rxMetadataIn_TDATA
 .lbTxDataOut_TVALID                     (shim2mux_TVALID),                             // input wire txDataOut_TVALID
 .lbTxDataOut_TREADY                     (shim2mux_TREADY),                             // output wire txDataOut_TREADY
 .lbTxDataOut_TDATA                      (shim2mux_TDATA),                              // input wire [63 : 0] txDataOut_TDATA
 .lbTxDataOut_TKEEP                      (shim2mux_TKEEP),                              // input wire [7 : 0] txDataOut_TKEEP
 .lbTxDataOut_TLAST                      (shim2mux_TLAST),                              // input wire [0 : 0] txDataOut_TLAST
-.lbTxLengthOut_TVALID                   (shim2muxTxLengthOut_V_V_TVALID),              // input wire txLengthOut_TVALID
-.lbTxLengthOut_TREADY                   (shim2muxTxLengthOut_V_V_TREADY),              // output wire txLengthOut_TREADY
-.lbTxLengthOut_TDATA                    (shim2muxTxLengthOut_V_V_TDATA),               // input wire [15 : 0] txLengthOut_TDATA
-.lbTxMetadataOut_TVALID                 (shim2muxTxMetadataOut_V_TVALID),              // input wire txMetadataOut_TVALID
-.lbTxMetadataOut_TREADY                 (shim2muxTxMetadataOut_V_TREADY),              // output wire txMetadataOut_TREADY
-.lbTxMetadataOut_TDATA                  (shim2muxTxMetadataOut_V_TDATA)                // input wire [95 : 0] txMetadataOut_TDATA
+.lbTxLengthOut_TVALID                   (shim2muxTxLengthOut_TVALID),              // input wire txLengthOut_TVALID
+.lbTxLengthOut_TREADY                   (shim2muxTxLengthOut_TREADY),              // output wire txLengthOut_TREADY
+.lbTxLengthOut_TDATA                    (shim2muxTxLengthOut_TDATA),               // input wire [15 : 0] txLengthOut_TDATA
+.lbTxMetadataOut_TVALID                 (shim2muxTxMetadataOut_TVALID),              // input wire txMetadataOut_TVALID
+.lbTxMetadataOut_TREADY                 (shim2muxTxMetadataOut_TREADY),              // output wire txMetadataOut_TREADY
+.lbTxMetadataOut_TDATA                  (shim2muxTxMetadataOut_TDATA)                // input wire [95 : 0] txMetadataOut_TDATA
 );
 
 reg app_start;
@@ -616,8 +616,8 @@ iperf_ip iperf_server
 .s_axis_tx_status_TDATA(axis_tx_status_TDATA),
 
 //Client only
-//.runExperiment_V(runExperiment),
-//.useConn_V(8'h01),
+//.runExperiment(runExperiment),
+//.useConn(8'h01),
 
 .aclk(axi_clk), // input aclk
 .aresetn(aresetn), // input aresetn
@@ -685,92 +685,33 @@ echo_server_application_ip myEchoServer (
   .aclk(axi_clk),                                                          // input wire aclk
   .aresetn(aresetn)                                                    // input wire aresetn
 );
-/*
-iperf_client_0 iperf_client_inst (
-  .runExperiment_V(runExperiment),                                    // input wire [0 : 0] runExperiment_V
-  .dualModeEn_V(dualMode),                                          // input wire [0 : 0] dualModeEn_V
-  .useConn_V(noOfConnections),                                                // input wire [7 : 0] useConn_V
-  .pkgWordCount_V(pkgWordCount),                                      // input wire [7 : 0] pkgWordCount_V
-  .regIpAddress1_V(32'h01010114),                                    // input wire [31 : 0] regIpAddress1_V
-  .m_axis_close_connection_TVALID(axis_close_connection_TVALID),      // output wire m_axis_close_connection_TVALID
-  .m_axis_close_connection_TREADY(axis_close_connection_TREADY),      // input wire m_axis_close_connection_TREADY
-  .m_axis_close_connection_TDATA(axis_close_connection_TDATA),        // output wire [15 : 0] m_axis_close_connection_TDATA
-  .m_axis_listen_port_TVALID(axis_listen_port_TVALID),                // output wire m_axis_listen_port_TVALID
-  .m_axis_listen_port_TREADY(axis_listen_port_TREADY),                // input wire m_axis_listen_port_TREADY
-  .m_axis_listen_port_TDATA(axis_listen_port_TDATA),                  // output wire [15 : 0] m_axis_listen_port_TDATA
-  .m_axis_open_connection_TVALID(axis_open_connection_TVALID),        // output wire m_axis_open_connection_TVALID
-  .m_axis_open_connection_TREADY(axis_open_connection_TREADY),        // input wire m_axis_open_connection_TREADY
-  .m_axis_open_connection_TDATA(axis_open_connection_TDATA),          // output wire [47 : 0] m_axis_open_connection_TDATA
-  .m_axis_read_package_TVALID(axis_read_package_TVALID),              // output wire m_axis_read_package_TVALID
-  .m_axis_read_package_TREADY(axis_read_package_TREADY),              // input wire m_axis_read_package_TREADY
-  .m_axis_read_package_TDATA(axis_read_package_TDATA),                // output wire [31 : 0] m_axis_read_package_TDATA
-  .m_axis_tx_data_TVALID(axis_tx_data_TVALID),                        // output wire m_axis_tx_data_TVALID
-  .m_axis_tx_data_TREADY(axis_tx_data_TREADY),                        // input wire m_axis_tx_data_TREADY
-  .m_axis_tx_data_TDATA(axis_tx_data_TDATA),                          // output wire [63 : 0] m_axis_tx_data_TDATA
-  .m_axis_tx_data_TKEEP(axis_tx_data_TKEEP),                          // output wire [7 : 0] m_axis_tx_data_TKEEP
-  .m_axis_tx_data_TLAST(axis_tx_data_TLAST),                          // output wire [0 : 0] m_axis_tx_data_TLAST
-  .m_axis_tx_metadata_TVALID(axis_tx_metadata_TVALID),                // output wire m_axis_tx_metadata_TVALID
-  .m_axis_tx_metadata_TREADY(axis_tx_metadata_TREADY),                // input wire m_axis_tx_metadata_TREADY
-  .m_axis_tx_metadata_TDATA(axis_tx_metadata_TDATA),                  // output wire [15 : 0] m_axis_tx_metadata_TDATA
-  .s_axis_listen_port_status_TVALID(axis_listen_port_status_TVALID),  // input wire s_axis_listen_port_status_TVALID
-  .s_axis_listen_port_status_TREADY(axis_listen_port_status_TREADY),  // output wire s_axis_listen_port_status_TREADY
-  .s_axis_listen_port_status_TDATA(axis_listen_port_status_TDATA),    // input wire [7 : 0] s_axis_listen_port_status_TDATA
-  .s_axis_notifications_TVALID(axis_notifications_TVALID),            // input wire s_axis_notifications_TVALID
-  .s_axis_notifications_TREADY(axis_notifications_TREADY),            // output wire s_axis_notifications_TREADY
-  .s_axis_notifications_TDATA(axis_notifications_TDATA),              // input wire [87 : 0] s_axis_notifications_TDATA
-  .s_axis_open_status_TVALID(axis_open_status_TVALID),                // input wire s_axis_open_status_TVALID
-  .s_axis_open_status_TREADY(axis_open_status_TREADY),                // output wire s_axis_open_status_TREADY
-  .s_axis_open_status_TDATA(axis_open_status_TDATA),                  // input wire [23 : 0] s_axis_open_status_TDATA
-  .s_axis_rx_data_TVALID(axis_rx_data_TVALID),                        // input wire s_axis_rx_data_TVALID
-  .s_axis_rx_data_TREADY(axis_rx_data_TREADY),                        // output wire s_axis_rx_data_TREADY
-  .s_axis_rx_data_TDATA(axis_rx_data_TDATA),                          // input wire [63 : 0] s_axis_rx_data_TDATA
-  .s_axis_rx_data_TKEEP(axis_rx_data_TKEEP),                          // input wire [7 : 0] s_axis_rx_data_TKEEP
-  .s_axis_rx_data_TLAST(axis_rx_data_TLAST),                          // input wire [0 : 0] s_axis_rx_data_TLAST
-  .s_axis_rx_metadata_TVALID(axis_rx_metadata_TVALID),                // input wire s_axis_rx_metadata_TVALID
-  .s_axis_rx_metadata_TREADY(axis_rx_metadata_TREADY),                // output wire s_axis_rx_metadata_TREADY
-  .s_axis_rx_metadata_TDATA(axis_rx_metadata_TDATA),                  // input wire [15 : 0] s_axis_rx_metadata_TDATA
-  .s_axis_tx_status_TVALID(axis_tx_status_TVALID),                    // input wire s_axis_tx_status_TVALID
-  .s_axis_tx_status_TREADY(axis_tx_status_TREADY),                    // output wire s_axis_tx_status_TREADY
-  .s_axis_tx_status_TDATA(axis_tx_status_TDATA),                      // input wire [23 : 0] s_axis_tx_status_TDATA
-  .aclk(axi_clk),                                                     // input wire aclk
-  .aresetn(aresetn)                                                   // input wire aresetn
-);*/
-/*
-vio_ip myVIO (
-  .clk(axi_clk),                    // input wire clk
-  .probe_in0(),                     // input wire [0 : 0] probe_in0
-  .probe_out0(runExperiment),       // output wire [0 : 0] probe_out0
-  .probe_out1(dualMode),            // output wire [0 : 0] probe_out1
-  .probe_out2(noOfConnections),     // output wire [7 : 0] probe_out2
-  .probe_out3(pkgWordCount)         // output wire [7 : 0] probe_out3
-);*/
 
 udpLoopback_0 udpLoopback_inst (
-  .lbPortOpenReplyIn_TVALID(mux2shim_portOpenReplyIn_V_V_TVALID),       // input wire portOpenReplyIn_TVALID
-  .lbPortOpenReplyIn_TREADY(mux2shim_portOpenReplyIn_V_V_TREADY),       // output wire portOpenReplyIn_TREADY
-  .lbPortOpenReplyIn_TDATA(mux2shim_portOpenReplyIn_V_V_TDATA),         // input wire [7 : 0] portOpenReplyIn_TDATA
-  .lbRequestPortOpenOut_TVALID(shim2mux_requestPortOpenOut_V_TVALID),   // output wire requestPortOpenOut_TVALID
-  .lbRequestPortOpenOut_TREADY(shim2mux_requestPortOpenOut_V_TREADY),   // input wire requestPortOpenOut_TREADY
-  .lbRequestPortOpenOut_TDATA(shim2mux_requestPortOpenOut_V_TDATA),     // output wire [15 : 0] requestPortOpenOut_TDATA
+  .lbPortOpenReplyIn_TVALID(mux2shim_portOpenReplyIn_TVALID),       // input wire portOpenReplyIn_TVALID
+  .lbPortOpenReplyIn_TREADY(mux2shim_portOpenReplyIn_TREADY),       // output wire portOpenReplyIn_TREADY
+  .lbPortOpenReplyIn_TDATA(mux2shim_portOpenReplyIn_TDATA),         // input wire [7 : 0] portOpenReplyIn_TDATA
+  .lbRequestPortOpenOut_TVALID(shim2mux_requestPortOpenOut_TVALID),   // output wire requestPortOpenOut_TVALID
+  .lbRequestPortOpenOut_TREADY(shim2mux_requestPortOpenOut_TREADY),   // input wire requestPortOpenOut_TREADY
+  .lbRequestPortOpenOut_TDATA(shim2mux_requestPortOpenOut_TDATA),     // output wire [15 : 0] requestPortOpenOut_TDATA
   .lbRxDataIn_TVALID(mux2shimRxDataIn_TVALID),                          // input wire rxDataIn_TVALID
   .lbRxDataIn_TREADY(mux2shimRxDataIn_TREADY),                          // output wire rxDataIn_TREADY
   .lbRxDataIn_TDATA(mux2shimRxDataIn_TDATA),                            // input wire [63 : 0] rxDataIn_TDATA
   .lbRxDataIn_TKEEP(mux2shimRxDataIn_TKEEP),                            // input wire [7 : 0] rxDataIn_TKEEP
   .lbRxDataIn_TLAST(mux2shimRxDataIn_TLAST),                            // input wire [0 : 0] rxDataIn_TLAST
-  .lbRxMetadataIn_TVALID(mux2shimRxMetadataIn_V_TVALID),                // input wire rxMetadataIn_TVALID
-  .lbRxMetadataIn_TREADY(mux2shimRxMetadataIn_V_TREADY),                // output wire rxMetadataIn_TREADY
-  .lbRxMetadataIn_TDATA(mux2shimRxMetadataIn_V_TDATA),                  // input wire [95 : 0] rxMetadataIn_TDATA
+  .lbRxMetadataIn_TVALID(mux2shimRxMetadataIn_TVALID),                // input wire rxMetadataIn_TVALID
+  .lbRxMetadataIn_TREADY(mux2shimRxMetadataIn_TREADY),                // output wire rxMetadataIn_TREADY
+  .lbRxMetadataIn_TDATA(mux2shimRxMetadataIn_TDATA),                  // input wire [95 : 0] rxMetadataIn_TDATA
   .lbTxDataOut_TVALID(shim2mux_TVALID),                                 // output wire txDataOut_TVALID
   .lbTxDataOut_TREADY(shim2mux_TREADY),                                 // input wire txDataOut_TREADY
   .lbTxDataOut_TDATA(shim2mux_TDATA),                                   // output wire [63 : 0] txDataOut_TDATA
   .lbTxDataOut_TKEEP(shim2mux_TKEEP),                                   // output wire [7 : 0] txDataOut_TKEEP
   .lbTxDataOut_TLAST(shim2mux_TLAST),                                   // output wire [0 : 0] txDataOut_TLAST
-  .lbTxLengthOut_TVALID(shim2muxTxLengthOut_V_V_TVALID),                // output wire txLengthOut_TVALID
-  .lbTxLengthOut_TREADY(shim2muxTxLengthOut_V_V_TREADY),                // input wire txLengthOut_TREADY
-  .lbTxLengthOut_TDATA(shim2muxTxLengthOut_V_V_TDATA),                  // output wire [15 : 0] txLengthOut_TDATA
-  .lbTxMetadataOut_TVALID(shim2muxTxMetadataOut_V_TVALID),              // output wire txMetadataOut_TVALID
-  .lbTxMetadataOut_TREADY(shim2muxTxMetadataOut_V_TREADY),              // input wire txMetadataOut_TREADY
-  .lbTxMetadataOut_TDATA(shim2muxTxMetadataOut_V_TDATA),                // output wire [95 : 0] txMetadataOut_TDATA
+  .lbTxLengthOut_TVALID(shim2muxTxLengthOut_TVALID),                // output wire txLengthOut_TVALID
+  .lbTxLengthOut_TREADY(shim2muxTxLengthOut_TREADY),                // input wire txLengthOut_TREADY
+  .lbTxLengthOut_TDATA(shim2muxTxLengthOut_TDATA),                  // output wire [15 : 0] txLengthOut_TDATA
+  .lbTxMetadataOut_TVALID(shim2muxTxMetadataOut_TVALID),              // output wire txMetadataOut_TVALID
+  .lbTxMetadataOut_TREADY(shim2muxTxMetadataOut_TREADY),              // input wire txMetadataOut_TREADY
+  .lbTxMetadataOut_TDATA(shim2muxTxMetadataOut_TDATA),                // output wire [95 : 0] txMetadataOut_TDATA
   .aclk(axi_clk),                                                       // input wire aclk
   .aresetn(aresetn)                                                     // input wire aresetn
 );

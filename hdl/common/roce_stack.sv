@@ -340,21 +340,21 @@ rocev2_ip rocev2_inst(
     .m_axis_tx_data_TLAST(roce_to_icrc.tlast),
     
     // User commands    
-    .s_axis_sq_meta_V_TVALID(rdma_sq.valid),
-    .s_axis_sq_meta_V_TREADY(rdma_sq.ready),
-    .s_axis_sq_meta_V_TDATA(rdma_sq_data), 
+    .s_axis_sq_meta_TVALID(rdma_sq.valid),
+    .s_axis_sq_meta_TREADY(rdma_sq.ready),
+    .s_axis_sq_meta_TDATA(rdma_sq_data), 
     
     // Memory
     // Write commands
-    .m_axis_mem_write_cmd_V_TVALID(m_rdma_wr_req.valid),
-    .m_axis_mem_write_cmd_V_TREADY(m_rdma_wr_req.ready),
-    //.m_axis_mem_write_cmd_V_TDATA(m_rdma_wr_req.data),
-    .m_axis_mem_write_cmd_V_TDATA(wr_cmd_data),
+    .m_axis_mem_write_cmd_TVALID(m_rdma_wr_req.valid),
+    .m_axis_mem_write_cmd_TREADY(m_rdma_wr_req.ready),
+    //.m_axis_mem_write_cmd_TDATA(m_rdma_wr_req.data),
+    .m_axis_mem_write_cmd_TDATA(wr_cmd_data),
     // Read commands
-    .m_axis_mem_read_cmd_V_TVALID(m_rdma_rd_req.valid),
-    .m_axis_mem_read_cmd_V_TREADY(m_rdma_rd_req.ready),
-    //.m_axis_mem_read_cmd_V_TDATA(m_rdma_rd_req.data),
-    .m_axis_mem_read_cmd_V_TDATA(rd_cmd_data),
+    .m_axis_mem_read_cmd_TVALID(m_rdma_rd_req.valid),
+    .m_axis_mem_read_cmd_TREADY(m_rdma_rd_req.ready),
+    //.m_axis_mem_read_cmd_TDATA(m_rdma_rd_req.data),
+    .m_axis_mem_read_cmd_TDATA(rd_cmd_data),
     // Write data
     .m_axis_mem_write_data_TVALID(m_axis_rdma_wr.tvalid),
     .m_axis_mem_write_data_TREADY(m_axis_rdma_wr.tready),
@@ -369,31 +369,31 @@ rocev2_ip rocev2_inst(
     .s_axis_mem_read_data_TLAST(s_axis_rdma_rd.tlast),
 
     // QP intf
-    .s_axis_qp_interface_V_TVALID(s_rdma_qp_interface.valid),
-    .s_axis_qp_interface_V_TREADY(s_rdma_qp_interface.ready),
-    .s_axis_qp_interface_V_TDATA(s_rdma_qp_interface.data),
-    .s_axis_qp_conn_interface_V_TVALID(s_rdma_conn_interface.valid),
-    .s_axis_qp_conn_interface_V_TREADY(s_rdma_conn_interface.ready),
-    .s_axis_qp_conn_interface_V_TDATA(s_rdma_conn_interface.data),
+    .s_axis_qp_interface_TVALID(s_rdma_qp_interface.valid),
+    .s_axis_qp_interface_TREADY(s_rdma_qp_interface.ready),
+    .s_axis_qp_interface_TDATA(s_rdma_qp_interface.data),
+    .s_axis_qp_conn_interface_TVALID(s_rdma_conn_interface.valid),
+    .s_axis_qp_conn_interface_TREADY(s_rdma_conn_interface.ready),
+    .s_axis_qp_conn_interface_TDATA(s_rdma_conn_interface.data),
 
     // ACK
-    .m_axis_rx_ack_meta_V_TVALID(rdma_ack.valid),
-    .m_axis_rx_ack_meta_V_TREADY(rdma_ack.ready),
-    .m_axis_rx_ack_meta_V_TDATA(ack_meta_data),
+    .m_axis_rx_ack_meta_TVALID(rdma_ack.valid),
+    .m_axis_rx_ack_meta_TREADY(rdma_ack.ready),
+    .m_axis_rx_ack_meta_TDATA(ack_meta_data),
 
     // IP
-    .local_ip_address_V({local_ip_address,local_ip_address,local_ip_address,local_ip_address}), //Use IPv4 addr
+    .local_ip_address({local_ip_address,local_ip_address,local_ip_address,local_ip_address}), //Use IPv4 addr
 
-    .regIbvCountRx_V(ibv_rx_pkg_count_data),
-    .regIbvCountRx_V_ap_vld(ibv_rx_pkg_count_valid),
-    .regIbvCountTx_V(ibv_tx_pkg_count_data),
-    .regIbvCountTx_V_ap_vld(ibv_tx_pkg_count_valid),
-    .regCrcDropPkgCount_V(crc_drop_pkg_count_data),
-    .regCrcDropPkgCount_V_ap_vld(crc_drop_pkg_count_valid),
-    .regInvalidPsnDropCount_V(psn_drop_pkg_count_data),
-    .regInvalidPsnDropCount_V_ap_vld(psn_drop_pkg_count_valid),
-    .regRetransCount_V(retrans_count_data),
-    .regRetransCount_V_ap_vld(retrans_count_valid)
+    .regIbvCountRx(ibv_rx_pkg_count_data),
+    .regIbvCountRx_ap_vld(ibv_rx_pkg_count_valid),
+    .regIbvCountTx(ibv_tx_pkg_count_data),
+    .regIbvCountTx_ap_vld(ibv_tx_pkg_count_valid),
+    .regCrcDropPkgCount(crc_drop_pkg_count_data),
+    .regCrcDropPkgCount_ap_vld(crc_drop_pkg_count_valid),
+    .regInvalidPsnDropCount(psn_drop_pkg_count_data),
+    .regInvalidPsnDropCount_ap_vld(psn_drop_pkg_count_valid),
+    .regRetransCount(retrans_count_data),
+    .regRetransCount_ap_vld(retrans_count_valid)
 
 `endif
 );
