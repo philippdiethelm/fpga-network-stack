@@ -402,6 +402,7 @@ ip_handler_ip ip_handler_inst (
 .s_axis_raw_TREADY(axis_slice_to_ibh.ready),
 .s_axis_raw_TDATA(axis_slice_to_ibh.data),
 .s_axis_raw_TKEEP(axis_slice_to_ibh.keep),
+.s_axis_raw_TSTRB(axis_slice_to_ibh.keep),
 .s_axis_raw_TLAST(axis_slice_to_ibh.last),
 
 .myIpAddress(iph_ip_address),
@@ -431,6 +432,7 @@ mac_ip_encode_ip mac_ip_encode_inst (
 .s_axis_ip_TREADY(axis_intercon_to_mie.ready),
 .s_axis_ip_TDATA(axis_intercon_to_mie.data),
 .s_axis_ip_TKEEP(axis_intercon_to_mie.keep),
+.s_axis_ip_TSTRB(axis_intercon_to_mie.keep),
 .s_axis_ip_TLAST(axis_intercon_to_mie.last),
 .s_axis_arp_lookup_reply_TVALID(axis_arp_lookup_reply_TVALID),
 .s_axis_arp_lookup_reply_TREADY(axis_arp_lookup_reply_TREADY),
@@ -922,6 +924,7 @@ arp_server_subnet_ip arp_server_inst(
 .s_axis_TREADY(axis_arp_slice_to_arp.ready),
 .s_axis_TDATA(axis_arp_slice_to_arp.data),
 .s_axis_TKEEP(axis_arp_slice_to_arp.keep),
+.s_axis_TSTRB(axis_arp_slice_to_arp.keep),
 .s_axis_TLAST(axis_arp_slice_to_arp.last),
 .s_axis_arp_lookup_request_TVALID(axis_arp_lookup_request_TVALID),
 .s_axis_arp_lookup_request_TREADY(axis_arp_lookup_request_TREADY),
@@ -951,16 +954,19 @@ icmp_server_ip icmp_server_inst (
   .s_axis_TREADY(axis_icmp_slice_to_icmp.ready),    // output wire dataIn_TREADY
   .s_axis_TDATA(axis_icmp_slice_to_icmp.data),      // input wire [63 : 0] dataIn_TDATA
   .s_axis_TKEEP(axis_icmp_slice_to_icmp.keep),      // input wire [7 : 0] dataIn_TKEEP
+  .s_axis_TSTRB(axis_icmp_slice_to_icmp.keep),      // input wire [7 : 0] dataIn_TKEEP
   .s_axis_TLAST(axis_icmp_slice_to_icmp.last),      // input wire [0 : 0] dataIn_TLAST
   .udpIn_TVALID(1'b0),//(axis_udp_to_icmp_tvalid),           // input wire udpIn_TVALID
   .udpIn_TREADY(),           // output wire udpIn_TREADY
   .udpIn_TDATA(0),//(axis_udp_to_icmp_tdata),             // input wire [63 : 0] udpIn_TDATA
   .udpIn_TKEEP(0),//(axis_udp_to_icmp_tkeep),             // input wire [7 : 0] udpIn_TKEEP
+  .udpIn_TSTRB(0),//(axis_udp_to_icmp_tkeep),             // input wire [7 : 0] udpIn_TKEEP
   .udpIn_TLAST(0),//(axis_udp_to_icmp_tlast),             // input wire [0 : 0] udpIn_TLAST
   .ttlIn_TVALID(1'b0),//(axis_ttl_to_icmp_tvalid),           // input wire ttlIn_TVALID
   .ttlIn_TREADY(),           // output wire ttlIn_TREADY
   .ttlIn_TDATA(0),//(axis_ttl_to_icmp_tdata),             // input wire [63 : 0] ttlIn_TDATA
   .ttlIn_TKEEP(0),//(axis_ttl_to_icmp_tkeep),             // input wire [7 : 0] ttlIn_TKEEP
+  .ttlIn_TSTRB(0),//(axis_ttl_to_icmp_tkeep),             // input wire [7 : 0] ttlIn_TKEEP
   .ttlIn_TLAST(0),//(axis_ttl_to_icmp_tlast),             // input wire [0 : 0] ttlIn_TLAST
   .m_axis_TVALID(axis_icmp_to_icmp_slice.valid),   // output wire dataOut_TVALID
   .m_axis_TREADY(axis_icmp_to_icmp_slice.ready),   // input wire dataOut_TREADY
@@ -1016,6 +1022,7 @@ ipv6_ip ipv6_inst(
 .s_axis_tx_data_TREADY(axi_icmpv6_to_ipv6_data.ready,        // output wire s_axis_data_TREADY
 .s_axis_tx_data_TDATA(axi_icmpv6_to_ipv6_data.data,          // input wire [63 : 0] s_axis_data_TDATA
 .s_axis_tx_data_TKEEP(axi_icmpv6_to_ipv6_data.keep,          // input wire [7 : 0] s_axis_data_TKEEP
+.s_axis_tx_data_TSTRB(axi_icmpv6_to_ipv6_data.keep,          // input wire [7 : 0] s_axis_data_TKEEP
 .s_axis_tx_data_TLAST(axi_icmpv6_to_ipv6_data.last,          // input wire [0 : 0] s_axis_data_TLAST
  
 .reg_ip_address(link_local_ipv6_address),
@@ -1042,6 +1049,7 @@ icmpv6_server_ip icmpv6_server_inst (
   .s_axis_data_TREADY(axi_ipv6_to_icmpv6_data.ready,        // output wire s_axis_data_TREADY
   .s_axis_data_TDATA(axi_ipv6_to_icmpv6_data.data,          // input wire [63 : 0] s_axis_data_TDATA
   .s_axis_data_TKEEP(axi_ipv6_to_icmpv6_data.keep,          // input wire [7 : 0] s_axis_data_TKEEP
+  .s_axis_data_TSTRB(axi_ipv6_to_icmpv6_data.keep,          // input wire [7 : 0] s_axis_data_TKEEP
   .s_axis_data_TLAST(axi_ipv6_to_icmpv6_data.last,          // input wire [0 : 0] s_axis_data_TLAST
   .s_axis_meta_TVALID(axi_ipv6_to_icmpv6_meta.valid,        // input wire s_axis_meta_TVALID
   .s_axis_meta_TREADY(axi_ipv6_to_icmpv6_meta.ready,        // output wire s_axis_meta_TREADY

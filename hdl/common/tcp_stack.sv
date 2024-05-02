@@ -170,6 +170,7 @@ toe_ip toe_inst (
 .s_axis_tcp_data_TREADY(s_axis_rx_data.ready),
 .s_axis_tcp_data_TDATA(s_axis_rx_data.data),
 .s_axis_tcp_data_TKEEP(s_axis_rx_data.keep),
+.s_axis_tcp_data_TSTRB(s_axis_rx_data.keep),
 .s_axis_tcp_data_TLAST(s_axis_rx_data.last),
 
 // rx read commands
@@ -189,6 +190,7 @@ toe_ip toe_inst (
 .s_axis_rxread_data_TREADY(axis_rxread_data.ready),
 .s_axis_rxread_data_TDATA(axis_rxread_data.data),
 .s_axis_rxread_data_TKEEP(axis_rxread_data.keep),
+.s_axis_rxread_data_TSTRB(axis_rxread_data.keep),
 .s_axis_rxread_data_TLAST(axis_rxread_data.last),
 // rx buffer write path
 .m_axis_rxwrite_data_TVALID(axis_rxwrite_data.valid),
@@ -214,6 +216,7 @@ toe_ip toe_inst (
 .s_axis_txread_data_TREADY(axis_txread_data.ready),
 .s_axis_txread_data_TDATA(axis_txread_data.data),
 .s_axis_txread_data_TKEEP(axis_txread_data.keep),
+.s_axis_txread_data_TSTRB(axis_txread_data.keep),
 .s_axis_txread_data_TLAST(axis_txread_data.last),
 // tx write path
 .m_axis_txwrite_data_TVALID(axis_txwrite_data.valid),
@@ -283,6 +286,7 @@ toe_ip toe_inst (
 .s_axis_tx_data_req_TREADY(s_axis_tx_data.ready),
 .s_axis_tx_data_req_TDATA(s_axis_tx_data.data),
 .s_axis_tx_data_req_TKEEP(s_axis_tx_data.keep),
+.s_axis_tx_data_req_TSTRB(s_axis_tx_data.keep),
 .s_axis_tx_data_req_TLAST(s_axis_tx_data.last),
 .m_axis_tx_data_rsp_TVALID(m_axis_tx_status.valid),
 .m_axis_tx_data_rsp_TREADY(m_axis_tx_status.ready),
@@ -310,6 +314,7 @@ toe_ip toe_inst (
 .s_axis_tcp_data_TREADY(s_axis_rx_data.ready),
 .s_axis_tcp_data_TDATA(s_axis_rx_data.data),
 .s_axis_tcp_data_TKEEP(s_axis_rx_data.keep),
+.s_axis_tcp_data_TSTRB(s_axis_rx_data.keep),
 .s_axis_tcp_data_TLAST(s_axis_rx_data.last),
 
 // rx buffer read path
@@ -317,6 +322,7 @@ toe_ip toe_inst (
 .s_axis_rxread_data_TREADY(axis_rxbuffer2app.ready),
 .s_axis_rxread_data_TDATA(axis_rxbuffer2app.data),
 .s_axis_rxread_data_TKEEP(axis_rxbuffer2app.keep),
+.s_axis_rxread_data_TSTRB(axis_rxbuffer2app.keep),
 .s_axis_rxread_data_TLAST(axis_rxbuffer2app.last),
 // rx buffer write path
 .m_axis_rxwrite_data_TVALID(axis_tcp2rxbuffer.valid),
@@ -342,6 +348,7 @@ toe_ip toe_inst (
 .s_axis_txread_data_TREADY(axis_txread_data.ready),
 .s_axis_txread_data_TDATA(axis_txread_data.data),
 .s_axis_txread_data_TKEEP(axis_txread_data.keep),
+.s_axis_txread_data_TSTRB(axis_txread_data.keep),
 .s_axis_txread_data_TLAST(axis_txread_data.last),
 // tx write path
 .m_axis_txwrite_data_TVALID(axis_txwrite_data.valid),
@@ -411,6 +418,7 @@ toe_ip toe_inst (
 .s_axis_tx_data_req_TREADY(s_axis_tx_data.ready),
 .s_axis_tx_data_req_TDATA(s_axis_tx_data.data),
 .s_axis_tx_data_req_TKEEP(s_axis_tx_data.keep),
+.s_axis_tx_data_req_TSTRB(s_axis_tx_data.keep),
 .s_axis_tx_data_req_TLAST(s_axis_tx_data.last),
 .m_axis_tx_data_rsp_TVALID(m_axis_tx_status.valid),
 .m_axis_tx_data_rsp_TREADY(m_axis_tx_status.ready),
@@ -557,7 +565,7 @@ hash_table_ip hash_table_inst (
   .m_axis_upd_rsp_TVALID(axis_ht_upd_rsp.valid),
   .m_axis_upd_rsp_TREADY(axis_ht_upd_rsp.ready),
   .m_axis_upd_rsp_TDATA(axis_ht_upd_rsp.data),
-  .regInsertFailureCount_ap_vld(ht_insert_failure_count_valid),
+  //.regInsertFailureCount_ap_vld(ht_insert_failure_count_valid),
   .regInsertFailureCount(ht_insert_failure_count)
 );
 
