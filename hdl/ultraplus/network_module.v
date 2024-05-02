@@ -249,6 +249,7 @@ ethernet_10g_ip ethernet_inst
     .gt_refclk_n (gt_refclk_n),
     .gt_refclk_out (gt_refclk_out),
     .sys_reset (sys_reset),
+    .qpllreset_in_0(sys_reset),
     .dclk (dclk),
 
 
@@ -271,7 +272,6 @@ ethernet_10g_ip ethernet_inst
     .gtpowergood_out_0 (gtpowergood[0]),
     .txoutclksel_in_0 (txoutclksel_in[0]),
     .rxoutclksel_in_0 (rxoutclksel_in[0]),
-    
     
     
     /*.gt_rxp_in_1(gt_rxp_in[1]),
@@ -945,6 +945,7 @@ ethernet_frame_padding_ip ethernet_frame_padding_inst (
   .s_axis_TREADY(s_axis_tready[idx]),  // output wire s_axis_TREADY
   .s_axis_TDATA(s_axis_tdata[idx]),    // input wire [63 : 0] s_axis_TDATA
   .s_axis_TKEEP(s_axis_tkeep[idx]),    // input wire [7 : 0] s_axis_TKEEP
+  .s_axis_TSTRB(s_axis_tkeep[idx]),    // input wire [7 : 0] s_axis_TKEEP
   .s_axis_TLAST(s_axis_tlast[idx]),    // input wire [0 : 0] s_axis_TLAST
   .ap_clk(net_clk),                    // input wire aclk
   .ap_rst_n(aresetn)              // input wire aresetn
