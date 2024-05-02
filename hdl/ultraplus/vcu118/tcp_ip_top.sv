@@ -221,6 +221,9 @@ module tcp_ip_top (
   network_stack #(
       .IP_SUBNET_MASK    (32'h00FFFFFF),  //reverse
       .IP_DEFAULT_GATEWAY(32'h01D4010A),  //reverse //TODO fix this
+      .DHCP_EN           (0),
+      .TCP_EN            (1),
+      .RX_DDR_BYPASS_EN  (1),
 `ifdef UDP
       .UDP_EN            (1)
 `endif
@@ -267,9 +270,9 @@ module tcp_ip_top (
       .s_axis_udp_tx_data       (axis_tx_udp_data),
 `endif
 
-      .set_ip_addr_valid(0),
+      .set_ip_addr_valid(1),
       .set_ip_addr_data            (local_ip_address),
-      .set_board_number_valid(0),
+      .set_board_number_valid(1),
       .set_board_number_data ({1'b0, gpio_switch[2:0]})
   );
 
@@ -395,10 +398,12 @@ module tcp_ip_top (
  */
 `ifdef UDP
   wire runUdpExperiment;
+  wire[7:0]   pkgWordCount;
 
   vio_udp_iperf_client vio_udp_iperf_client_inst (
       .clk       (aclk),             // input wire clk
-      .probe_out0(runUdpExperiment)  // output wire [0 : 0] probe_out0
+      .probe_out0(runUdpExperiment), // output wire [0 : 0] probe_out0
+      .probe_out1(pkgWordCount)      // output wire [7 : 0] probe_out1
   );
 
   reg runIperfUdp;
@@ -428,6 +433,7 @@ module tcp_ip_top (
       .ap_clk(aclk),  // input wire aclk
       .ap_rst_n(aresetn),  // input wire aresetn
       .runExperiment(runUdpExperiment | runIperfUdp),  // input wire [0 : 0] runExperiment_V
+      .pkgWordCount(pkgWordCount),
       .packetGap(packetGap),
       //.regMyIpAddress(32'h02D4010B),                    // input wire [31 : 0] regMyIpAddress_V
       .targetIpAddress({
